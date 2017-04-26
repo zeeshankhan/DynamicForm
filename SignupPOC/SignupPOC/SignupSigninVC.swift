@@ -16,10 +16,19 @@ enum SignUpSignInViewType {
 class SignupSigninVC: UIViewController {
 
     var viewType = SignUpSignInViewType.signUp
-    var rows: [CellType] = []
+    var rows: [CellType] = [] {
+        didSet {
+            entryTableView.reloadData()
+        }
+    }
 
     @IBOutlet weak var entryTableView: UITableView!
-    @IBOutlet weak var signupButton: UIButton!
+    @IBOutlet weak var signupButton: UIButton! {
+        didSet {
+            signupButton.layer.cornerRadius = 4.0
+        }
+    }
+    
     @IBOutlet weak var forgotPassTnCButton: UIButton!
     @IBOutlet weak var tableBottomMargin: NSLayoutConstraint!
 
@@ -28,7 +37,6 @@ class SignupSigninVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        signupButton.layer.cornerRadius = 4.0
 
         switch viewType {
             case .signIn: configureSignIN()
